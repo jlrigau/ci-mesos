@@ -1,0 +1,20 @@
+{
+  "id": "jenkins",
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "jlrigau/jenkins",
+      "network": "HOST"
+    },
+    "volumes": [
+      {
+        "containerPath": "/var/jenkins_home",
+        "hostPath": "/var/data/jenkins",
+        "mode": "RW"
+      }
+    ]
+  },
+  "cpus": 0.2,
+  "mem": 128.0,
+  "instances": 1
+}
