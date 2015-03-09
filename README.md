@@ -33,21 +33,22 @@ $docker logs -f $(docker ps -lq)
 
 ## Show the new Framework on Mesos interface
 
-## Create on Slave Info
+## Create a Slave Info for Java
 
 * Label String=java
 * Idle Termination Minutes=30
 * check Use Docker Containerizer
   * Docker Image=java:7
 
-## Create a new Freestyle project on Jenkins
+## Create a new project with Java on Jenkins
 
-* Project name=test
+* Project type=Freestyle project
+* Project name=Projet Java
 * Restrict where this project can be run=java
 * Add build step
   * Execute shell
   * Command=java -version
-* Save Project
+* Save Project and run it
 
 ## Schedule a build
 
@@ -65,18 +66,26 @@ $docker logs -f $(docker ps -lq)
 $docker ps
 ```
 
-## Create an other Slave Info
+## Configure Maven
 
-* Label String=java2
+* On Configure System add a new Maven installation
+  * Name=maven
+  * Check Install automatically
+  * Install from Apache with version 3.2.2
+
+## Create a Slave Info for Maven
+
+* Label String=maven
 * Idle Termination Minutes=30
 * check Use Docker Containerizer
-  * Docker Image=java:7
+  * Docker Image=jlrigau/maven-git
 
-## Create an other Freestyle project on Jenkins
+## Create a new Maven project on Jenkins
 
-* Project name=test2
-* Restrict where this project can be run=java2
+* Project type=Maven project
+* Project name=Projet Maven
+* Restrict where this project can be run=maven
 * Add build step
   * Execute shell
   * Command=java -version
-* Save Project
+* Save Project and run it
