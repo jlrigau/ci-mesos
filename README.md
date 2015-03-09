@@ -1,6 +1,8 @@
 # ci-mesos
 
-## Show Dockerfile for jenkins-master
+## Jenkins Docker image
+
+Open jenkins Dockerfile
 
 * Check FROM jenkins:weekly
 * Show Mesos native library setup
@@ -9,14 +11,14 @@
   * Plugin management with .csv file
   * Check mesos plugin presence
 
-## Show Marathon defintion file
+## Show Marathon definition file
 
 ```shell
 $curl -X POST -H "Content-Type: application/json" http://MARATHON_PUBLIC_HOST:8080/v2/apps -d@jenkins.json
 ```
 
 * Show application in Marathon interface
-* Show log on Mesos slave
+* Show Jenkins logs on Mesos slave
 
 ```shell
 $docker ps
@@ -85,7 +87,18 @@ $docker ps
 * Project type=Maven project
 * Project name=Projet Maven
 * Restrict where this project can be run=maven
-* Add build step
-  * Execute shell
-  * Command=java -version
+* Configure Source Code Management
+  * Check Git
+  * Repository URL=https://github.com/jlrigau/ci-mesos.git
+* Configure Build
+  * Root POM=sample/pom.xml
+  * Goals and options=clean package
 * Save Project and run it
+
+## Connect to slave container
+
+```shell  
+$docker exec -it CONTAINER_ID /bin/bash
+```
+
+* Look at /jenkins/workspace/Projet Maven
