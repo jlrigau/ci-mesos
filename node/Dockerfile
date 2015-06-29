@@ -17,4 +17,7 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-
 	&& npm install -g npm@"$NPM_VERSION" \
 	&& npm cache clear
 
+# use https instead of git protocol to avoid Connection refused
+RUN git config --global url."https://".insteadOf git://
+
 CMD [ "node" ]
